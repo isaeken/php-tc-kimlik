@@ -27,7 +27,8 @@
     },
     "require": {
         "php": "^7.4|^8.0",
-        "guzzlehttp/guzzle": "^7.2"
+        "guzzlehttp/guzzle": "^7.2",
+        "spatie/regex": "9999999-dev"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.2",
