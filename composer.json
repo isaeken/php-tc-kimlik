@@ -1,0 +1,36 @@
+{
+    "name": "isaeken/php-tc-kimlik",
+    "version": "1.0.0",
+    "type": "library",
+    "description": "PHP Turkey Identity Validation",
+    "keywords": ["php", "laravel", "tc", "turkey", "identity", "kimlik", "validation"],
+    "homepage": "https://www.isaeken.com.tr",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "İsa Eken",
+            "email": "hello@isaeken.com.tr",
+            "homepage": "https://www.isaeken.com.tr",
+            "role": "Founder"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "IsaEken\\PhpTcKimlik\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IsaEken\\PhpTcKimlik\\Test\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^7.4|^8.0",
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^5.2",
+        "phpunit/phpunit": "^9.5"
+    }
+}
