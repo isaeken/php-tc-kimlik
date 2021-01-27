@@ -1,7 +1,11 @@
 <?php
 
+namespace IsaEken\PhpTcKimlik\Test;
 
+
+use DateTime;
 use IsaEken\PhpTcKimlik\Helpers;
+use IsaEken\PhpTcKimlik\NviRequest;
 use IsaEken\PhpTcKimlik\PhpTcKimlik;
 use PHPUnit\Framework\TestCase;
 
@@ -23,60 +27,44 @@ class GeneralTest extends TestCase
         $this->assertTrue(Helpers::verifyYear(202));
         $this->assertFalse(Helpers::verifyYear(-2020));
         $this->assertFalse(Helpers::verifyYear("-2020"));
+
+        $this->assertEquals("İSA", Helpers::upper("isa"));
+        $this->assertEquals("isa", Helpers::lower("İSA"));
     }
 
-    public function testAliases()
+    public function testNviRequest()
     {
-        $this->assertTrue(PhpTcKimlik::verifyIdentity("12345678910"));
-        $this->assertFalse(PhpTcKimlik::verifyIdentity("09876543210"));
+        $request = new NviRequest;
+        $request->setData("TCKimlikNo", "12345678910");
+        $request->setData("Ad", "İsa");
+        $request->setData("Soyad", "Eken");
+        $request->setData("DogumYili", "2002");
 
-        $this->assertTrue(PhpTcKimlik::verifyName("İsa"));
-        $this->assertTrue(PhpTcKimlik::verifyName("Eken"));
-        $this->assertTrue(PhpTcKimlik::verifyName("İsa Eken"));
-        $this->assertFalse(PhpTcKimlik::verifyName("^!İsa \"'-- Eken"));
+        $xml = <<<XML
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Body>
+<TCKimlikNoDogrula xmlns="http://tckimlik.nvi.gov.tr/WS">
+<TCKimlikNo>12345678910</TCKimlikNo>
+<Ad>İsa</Ad>
+<Soyad>Eken</Soyad>
+<DogumYili>2002</DogumYili>
+</TCKimlikNoDogrula>
+</soap:Body>
+</soap:Envelope>
+XML;
 
-        $this->assertTrue(PhpTcKimlik::verifyYear(date("Y")));
-        $this->assertTrue(PhpTcKimlik::verifyYear(1881));
-        $this->assertTrue(PhpTcKimlik::verifyYear("2000"));
-        $this->assertTrue(PhpTcKimlik::verifyYear(202));
-        $this->assertFalse(PhpTcKimlik::verifyYear(-2020));
-        $this->assertFalse(PhpTcKimlik::verifyYear("-2020"));
+        $this->assertEquals($xml, (new NviRequest())->setData("TCKimlikNoDogrula", $request, ["xmlns" => "http://tckimlik.nvi.gov.tr/WS"])->__toXml());
     }
 
-    public function testValidation()
+    public function testValidators()
     {
-        $this->assertFalse(PhpTcKimlik::validate("12345678910", "İsa", "Eken", "2002"));
-        $this->assertFalse(PhpTcKimlik::validate("12345678910", "''''''", "Eken", "2002"));
-        $this->assertFalse(PhpTcKimlik::validate("12345678910", "İsa", "'''''''", "2002"));
-        $this->assertFalse(PhpTcKimlik::validate("12345678910", "İsa", "Eken", "''''''''"));
-        $this->assertFalse(PhpTcKimlik::validate("00000000000", "İsa", "Eken", "2002"));
+        $identityCard = new PhpTcKimlik;
+        $identityCard->setIdentityNumber("12345678910");
+        $identityCard->setGivenName("İsa");
+        $identityCard->setSurname("Eken");
+        $identityCard->setBirthDate(new DateTime("10.04.2002"));
 
-        $this->assertTrue(PhpTcKimlik::validator("12345678910", "İsa", "Eken", "2002")->check(false));
-        $this->assertFalse(PhpTcKimlik::validator("12345678910", "İsa", "Eken", "2002")->check(true));
-        $this->assertFalse(PhpTcKimlik::validator("00000000000", "İsa", "Eken", "2002")->check(false));
-
-        $this->assertEquals("12345678910", PhpTcKimlik::validator()->setIdentity("12345678910")->getIdentity());
-        $this->assertEquals("İsa", PhpTcKimlik::validator()->setName("İsa")->getName());
-        $this->assertEquals("Eken", PhpTcKimlik::validator()->setFamilyName("Eken")->getFamilyName());
-        $this->assertEquals((int) "2002", PhpTcKimlik::validator()->setYear("2002")->getYear());
-        $this->assertEquals("İsa", PhpTcKimlik::validator("12345678910", "İsa", "Eken", "2002")->getName());
-
-        $this->assertTrue(
-            PhpTcKimlik::validator()
-                ->setIdentity("12345678910")
-                ->setName("İsa")
-                ->setFamilyName("Eken")
-                ->setYear("2002")
-                ->check(false)
-        );
-
-        $this->assertFalse(
-            PhpTcKimlik::validator()
-                ->setIdentity("12345678910")
-                ->setName("İsa")
-                ->setFamilyName("Eken")
-                ->setYear("2002")
-                ->check()
-        );
+        $this->assertFalse($identityCard->validateIdentityNumber());
     }
 }
