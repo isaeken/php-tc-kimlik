@@ -70,4 +70,11 @@ XML;
         $this->assertFalse($identityCard->validateForeignIdentityNumber());
         $this->assertFalse($identityCard->validateIdentityCard());
     }
+
+    public function testShortValidators()
+    {
+        $this->assertFalse(PhpTcKimlik::isValidIdentity("12345678910", "isa", "eken", new DateTime("10.04.2002")));
+        $this->assertFalse(PhpTcKimlik::isValidForeignIdentity("12345678910", "isa", "eken", new DateTime("10.04.2002")));
+        $this->assertFalse(PhpTcKimlik::isValidIdentityCard("12345678910", "xxxxxxxxx", "isa", "eken", new DateTime("10.04.2002")));
+    }
 }
