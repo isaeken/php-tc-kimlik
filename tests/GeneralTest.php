@@ -50,5 +50,33 @@ class GeneralTest extends TestCase
         $this->assertFalse(PhpTcKimlik::validate("12345678910", "İsa", "'''''''", "2002"));
         $this->assertFalse(PhpTcKimlik::validate("12345678910", "İsa", "Eken", "''''''''"));
         $this->assertFalse(PhpTcKimlik::validate("00000000000", "İsa", "Eken", "2002"));
+
+        $this->assertTrue(PhpTcKimlik::validator("12345678910", "İsa", "Eken", "2002")->check(false));
+        $this->assertFalse(PhpTcKimlik::validator("12345678910", "İsa", "Eken", "2002")->check(true));
+        $this->assertFalse(PhpTcKimlik::validator("00000000000", "İsa", "Eken", "2002")->check(false));
+
+        $this->assertEquals("12345678910", PhpTcKimlik::validator()->setIdentity("12345678910")->getIdentity());
+        $this->assertEquals("İsa", PhpTcKimlik::validator()->setName("İsa")->getName());
+        $this->assertEquals("Eken", PhpTcKimlik::validator()->setFamilyName("Eken")->getFamilyName());
+        $this->assertEquals((int) "2002", PhpTcKimlik::validator()->setYear("2002")->getYear());
+        $this->assertEquals("İsa", PhpTcKimlik::validator("12345678910", "İsa", "Eken", "2002")->getName());
+
+        $this->assertTrue(
+            PhpTcKimlik::validator()
+                ->setIdentity("12345678910")
+                ->setName("İsa")
+                ->setFamilyName("Eken")
+                ->setYear("2002")
+                ->check(false)
+        );
+
+        $this->assertFalse(
+            PhpTcKimlik::validator()
+                ->setIdentity("12345678910")
+                ->setName("İsa")
+                ->setFamilyName("Eken")
+                ->setYear("2002")
+                ->check()
+        );
     }
 }
