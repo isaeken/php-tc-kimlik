@@ -62,7 +62,7 @@ interface IdentityCardInterface
      *
      * @return DateTimeInterface
      */
-    public function getDateOfBirth() : DateTimeInterface;
+    public function getBirthDate() : DateTimeInterface;
 
     /**
      * Set date of birth.
@@ -70,7 +70,7 @@ interface IdentityCardInterface
      * @param DateTimeInterface $date
      * @return IdentityCardInterface
      */
-    public function setDateOfBirth(DateTimeInterface $date) : IdentityCardInterface;
+    public function setBirthDate(DateTimeInterface $date) : IdentityCardInterface;
 
     /**
      * Get gender.
