@@ -15,6 +15,36 @@ use Spatie\Regex\Regex;
 class Helpers
 {
     /**
+     * mb_strtoupper function with Turkish characters.
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function upper(string $string) : string
+    {
+        return mb_strtoupper(str_replace(
+            ["ç", "ğ", "ı", "ö", "ş", "ü", "i"],
+            ["Ç", "Ğ", "I", "Ö", "Ş", "Ü", "İ"],
+            $string
+        ));
+    }
+
+    /**
+     * mb_strtolower function with Turkish characters.
+     *
+     * @param string $string
+     * @return string
+     */
+    public static function lower(string $string) : string
+    {
+        return mb_strtolower(str_replace(
+            ["Ç", "Ğ", "I", "Ö", "Ş", "Ü", "İ"],
+            ["ç", "ğ", "ı", "ö", "ş", "ü", "i"],
+            $string
+        ));
+    }
+
+    /**
      * Check identity is valid.
      *
      * @param string $identity
