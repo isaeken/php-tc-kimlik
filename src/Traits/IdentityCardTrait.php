@@ -6,7 +6,6 @@ namespace IsaEken\PhpTcKimlik\Traits;
 
 use DateTime;
 use DateTimeInterface;
-use IsaEken\PhpTcKimlik\Interfaces\IdentityCardInterface;
 use IsaEken\PhpTcKimlik\PhpTcKimlik;
 
 trait IdentityCardTrait
@@ -42,9 +41,9 @@ trait IdentityCardTrait
      * Set identity number.
      *
      * @param string $identity
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setIdentityNumber(string $identity) : IdentityCardInterface
+    public function setIdentityNumber(string $identity) : PhpTcKimlik
     {
         $this->variables["identity"] = $identity;
 
@@ -66,9 +65,9 @@ trait IdentityCardTrait
      * Set surname.
      *
      * @param string $surname
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setSurname(string $surname) : IdentityCardInterface
+    public function setSurname(string $surname) : PhpTcKimlik
     {
         $this->variables["surname"] = $surname;
 
@@ -90,9 +89,9 @@ trait IdentityCardTrait
      * Set given name.
      *
      * @param string $name
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setGivenName(string $name) : IdentityCardInterface
+    public function setGivenName(string $name) : PhpTcKimlik
     {
         $this->variables["given_name"] = $name;
 
@@ -118,9 +117,9 @@ trait IdentityCardTrait
      * Set date of birth.
      *
      * @param DateTimeInterface $date
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setBirthDate(DateTimeInterface $date) : IdentityCardInterface
+    public function setBirthDate(DateTimeInterface $date) : PhpTcKimlik
     {
         $this->variables["birth_date"] = $date;
 
@@ -142,9 +141,9 @@ trait IdentityCardTrait
      * Set gender.
      *
      * @param string $gender
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setGender(string $gender) : IdentityCardInterface
+    public function setGender(string $gender) : PhpTcKimlik
     {
         $this->variables["gender"] = $gender;
 
@@ -166,9 +165,9 @@ trait IdentityCardTrait
      * Set document number.
      *
      * @param string $documentNumber
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setDocumentNumber(string $documentNumber) : IdentityCardInterface
+    public function setDocumentNumber(string $documentNumber) : PhpTcKimlik
     {
         $this->variables["document_number"] = $documentNumber;
 
@@ -190,9 +189,9 @@ trait IdentityCardTrait
      * Set nationality.
      *
      * @param string $nationality
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setNationality(string $nationality) : IdentityCardInterface
+    public function setNationality(string $nationality) : PhpTcKimlik
     {
         $this->variables["nationality"] = $nationality;
 
@@ -218,9 +217,9 @@ trait IdentityCardTrait
      * Set valid until.
      *
      * @param DateTimeInterface $date
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setValidUntil(DateTimeInterface $date) : IdentityCardInterface
+    public function setValidUntil(DateTimeInterface $date) : PhpTcKimlik
     {
         $this->variables["valid_until"] = $date;
 
@@ -242,9 +241,9 @@ trait IdentityCardTrait
      * Set mother name.
      *
      * @param string $name
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setMotherName(string $name) : IdentityCardInterface
+    public function setMotherName(string $name) : PhpTcKimlik
     {
         $this->variables["mother_name"] = $name;
 
@@ -266,9 +265,9 @@ trait IdentityCardTrait
      * Set father name.
      *
      * @param string $name
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setFatherName(string $name) : IdentityCardInterface
+    public function setFatherName(string $name) : PhpTcKimlik
     {
         $this->variables["father_name"] = $name;
 
@@ -290,9 +289,9 @@ trait IdentityCardTrait
      * Set issued by.
      *
      * @param string $issuedBy
-     * @return IdentityCardInterface
+     * @return PhpTcKimlik
      */
-    public function setIssuedBy(string $issuedBy) : IdentityCardInterface
+    public function setIssuedBy(string $issuedBy) : PhpTcKimlik
     {
         $this->variables["issued_by"] = $issuedBy;
 
