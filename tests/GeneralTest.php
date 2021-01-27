@@ -61,11 +61,13 @@ XML;
     {
         $identityCard = new PhpTcKimlik;
         $identityCard->setIdentityNumber("12345678910");
+        $identityCard->setDocumentNumber("xxxxxxxxx");
         $identityCard->setGivenName("İsa");
         $identityCard->setSurname("Eken");
         $identityCard->setBirthDate(new DateTime("10.04.2002"));
 
         $this->assertFalse($identityCard->validateIdentityNumber());
         $this->assertFalse($identityCard->validateForeignIdentityNumber());
+        $this->assertFalse($identityCard->validateIdentityCard());
     }
 }
