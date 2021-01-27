@@ -96,7 +96,7 @@ trait ValidatorTrait
                 ->setData("Soyad", $surname)
                 ->setData("DogumGun", $birth_date->format("d"))
                 ->setData("DogumAy", $birth_date->format("m"))
-                ->setData("DogumGun", $birth_date->format("Y")),
+                ->setData("DogumYil", $birth_date->format("Y")),
                 [ "xmlns" => "http://tckimlik.nvi.gov.tr/WS" ]
             )->__toXml();
 
