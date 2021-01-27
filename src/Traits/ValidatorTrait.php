@@ -7,6 +7,7 @@ namespace IsaEken\PhpTcKimlik\Traits;
 use DateTimeInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use IsaEken\PhpTcKimlik\Helpers;
 use IsaEken\PhpTcKimlik\NviRequest;
 
 /**
@@ -27,13 +28,30 @@ trait ValidatorTrait
      */
     public function validateIdentityNumber() : bool
     {
+        $identity = $this->getIdentityNumber();
+        $given_name = $this->getGivenName();
+        $surname = $this->getSurname();
+        $birth_year = $this->getBirthDate()->format("Y");
+
+        if (!Helpers::verifyIdentity($identity)) {
+            return false;
+        }
+
+        if (!Helpers::verifyName($given_name) || !Helpers::verifyName($surname)) {
+            return false;
+        }
+
+        if (!Helpers::verifyYear($birth_year)) {
+            return false;
+        }
+
         $body = new NviRequest;
         $request = new NviRequest;
 
-        $body->setData("TCKimlikNo", $this->getIdentityNumber());
-        $body->setData("Ad", $this->getGivenName());
-        $body->setData("Soyad", $this->getSurname());
-        $body->setData("DogumYili", $this->getBirthDate()->format("Y"));
+        $body->setData("TCKimlikNo", $identity);
+        $body->setData("Ad", $given_name);
+        $body->setData("Soyad", $surname);
+        $body->setData("DogumYili", $birth_year);
         $request->setData("TCKimlikNoDogrula", $body, [ "xmlns" => "http://tckimlik.nvi.gov.tr/WS" ]);
 
         try {
