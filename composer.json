@@ -1,6 +1,6 @@
 {
     "name": "isaeken/php-tc-kimlik",
-    "version": "1.0.0",
+    "version": "1.4.2",
     "type": "library",
     "description": "PHP Turkey Identity Validation",
     "keywords": ["php", "laravel", "tc", "turkey", "identity", "kimlik", "validation"],
@@ -27,8 +27,8 @@
     },
     "require": {
         "php": "^7.4|^8.0",
-        "guzzlehttp/guzzle": "^7.2",
-        "spatie/regex": "9999999-dev"
+        "guzzlehttp/guzzle": "^6.5|^7.0|^7.2",
+        "spatie/regex": ">=1.4.2"
     },
     "require-dev": {
         "symfony/var-dumper": "^5.2",
