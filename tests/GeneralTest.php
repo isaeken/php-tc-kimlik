@@ -66,5 +66,6 @@ XML;
         $identityCard->setBirthDate(new DateTime("10.04.2002"));
 
         $this->assertFalse($identityCard->validateIdentityNumber());
+        $this->assertFalse($identityCard->validateForeignIdentityNumber());
     }
 }

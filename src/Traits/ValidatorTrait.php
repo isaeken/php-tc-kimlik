@@ -76,4 +76,53 @@ trait ValidatorTrait
 
         return false;
     }
+
+    /**
+     * Validate foreign identity number using NVI.
+     *
+     * @return bool
+     */
+    public function validateForeignIdentityNumber() : bool
+    {
+        $identity = $this->getIdentityNumber();
+        $given_name = $this->getGivenName();
+        $surname = $this->getSurname();
+        $birth_date = $this->getBirthDate();
+
+        if (!Helpers::verifyName($given_name) || !Helpers::verifyName($surname)) {
+            return false;
+        }
+
+        $request = (new NviRequest)
+            ->setData("YabanciKimlikNoDogrula", (new NviRequest())
+                ->setData("KimlikNo", $identity)
+                ->setData("Ad", $given_name)
+                ->setData("Soyad", $surname)
+                ->setData("DogumGun", $birth_date->format("d"))
+                ->setData("DogumAy", $birth_date->format("m"))
+                ->setData("DogumGun", $birth_date->format("Y")),
+                [ "xmlns" => "http://tckimlik.nvi.gov.tr/WS" ]
+            )->__toXml();
+
+        try {
+            $response = $this->client->request("POST", "https://tckimlik.nvi.gov.tr/Service/KPSPublicYabanciDogrula.asmx", [
+                "headers" => [
+                    "POST" => "/Service/KPSPublicYabanciDogrula.asmx HTTP/1.1",
+                    "Host" => "tckimlik.nvi.gov.tr",
+                    "Content-Type" => "text/xml; charset=utf-8",
+                    "Content-Length" => strlen($request),
+                ],
+                "body" => $request,
+            ]);
+
+            if ($response->getStatusCode() === 200 && strip_tags($response->getBody()->getContents()) == "true") {
+                return true;
+            }
+
+        } catch (GuzzleException $exception) {
+            return false;
+        }
+
+        return false;
+    }
 }
