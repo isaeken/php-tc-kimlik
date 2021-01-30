@@ -47,7 +47,7 @@ class RealName implements Rule
     {
         $this->attribute = $attribute;
 
-        if (!is_string($value) || is_null($value)) {
+        if ($this->required && (!is_string($value) || is_null($value))) {
             return false;
         }
 
