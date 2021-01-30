@@ -1,6 +1,6 @@
 {
     "name": "isaeken/php-tc-kimlik",
-    "version": "1.4.2",
+    "version": "1.4.4",
     "type": "library",
     "description": "PHP Turkey Identity Validation",
     "keywords": ["php", "laravel", "tc", "turkey", "identity", "kimlik", "validation"],
@@ -44,7 +44,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "IsaEken\\PhpTcKimlik\\PhpTcKimlik"
+                "IsaEken\\PhpTcKimlik\\PhpTcKimlikServiceProvider"
             ]
         }
     }
