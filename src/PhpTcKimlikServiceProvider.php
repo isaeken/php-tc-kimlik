@@ -21,22 +21,7 @@ class PhpTcKimlikServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->bootValidator();
-    }
 
-    protected function bootValidator()
-    {
-        Validator::extend('tc', function ($attribute, $value, $parameters, $validator) {
-            return PhpTcKimlik::verifyIdentity($value);
-        });
-
-        Validator::extend('tc-name', function ($attribute, $value, $parameters, $validator) {
-            return PhpTcKimlik::verifyName($value);
-        });
-
-        Validator::extend('tc-year', function ($attribute, $value, $parameters, $validator) {
-            return PhpTcKimlik::verifyIdentity($value);
-        });
     }
 
     /**
