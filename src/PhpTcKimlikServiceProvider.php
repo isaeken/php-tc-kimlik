@@ -3,9 +3,7 @@
 
 namespace IsaEken\PhpTcKimlik;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
-use IsaEken\TurkeyIdValidator;
 
 /**
  * Class PhpTcKimlikServiceProvider
@@ -21,7 +19,11 @@ class PhpTcKimlikServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__ . "/../resources/lang" => resource_path("lang/vendor/phpTcKimlik"),
+        ]);
 
+        $this->loadTranslationsFrom(__DIR__ . "/../resources/lang/", "phpTcKimlik");
     }
 
     /**
