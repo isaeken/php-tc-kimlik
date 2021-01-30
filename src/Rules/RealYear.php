@@ -59,6 +59,6 @@ class RealYear implements Rule
      */
     public function message() : string
     {
-        return __("Please enter real year.");
+        return __("phpTcKimlik::messages.invalid_year");
     }
 }

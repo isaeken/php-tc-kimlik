@@ -59,6 +59,6 @@ class RealName implements Rule
      */
     public function message() : string
     {
-        return __("Please enter real name.");
+        return __("phpTcKimlik::messages.invalid_name");
     }
 }

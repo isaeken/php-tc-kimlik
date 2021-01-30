@@ -59,6 +59,6 @@ class IdentityNumber implements Rule
      */
     public function message() : string
     {
-        return __("Invalid identity number");
+        return __("phpTcKimlik::messages.invalid_identity_number");
     }
 }

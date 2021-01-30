@@ -76,7 +76,7 @@ class IdentityValidator
 
             if (!in_array($method, ["get", "post", "put", "delete", "patch"])) {
                 print redirect()->back()->withErrors([
-                    __("Please enter valid identity."),
+                    __("phpTcKimlik::messages.invalid_identity"),
                 ]);
                 return [];
             }
@@ -95,7 +95,7 @@ class IdentityValidator
 
         if (!$isValidIdentity) {
             print redirect()->back()->withErrors([
-                __("Please enter valid identity."),
+                __("phpTcKimlik::messages.invalid_identity"),
             ]);
             return [];
         }
