@@ -7,6 +7,7 @@
     "homepage": "https://www.isaeken.com.tr",
     "license": "MIT",
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "İsa Eken",
@@ -36,5 +37,15 @@
     },
     "scripts": {
         "test": ".\\vendor\\bin\\phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IsaEken\\PhpTcKimlik\\PhpTcKimlik"
+            ]
+        }
     }
 }
