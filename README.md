@@ -23,6 +23,87 @@ composer require isaeken/php-tc-kimlik
 
 ## Kullanım
 
+### Laravel
+
+> Türkçe dil için ``config/app.php`` dosyasında ``locale`` değişkenini ``tr`` yapın.
+
+#### Kimlik Numarası
+
+````php
+public function index(Request $request)
+{
+    $request->validate([
+        'tc_kimlik_numarasi' => [new IsaEken\PhpTcKimlik\Rules\IdentityNumber],
+    ]);
+}
+````
+
+#### İsim Kontrolü
+
+````php
+public function index(Request $request)
+{
+    $request->validate([
+        'isim' => [new IsaEken\PhpTcKimlik\Rules\RealName],
+        'soyisim' => [new IsaEken\PhpTcKimlik\Rules\RealName],
+    ]);
+}
+````
+
+#### Yıl Kontrolü
+
+````php
+public function index(Request $request)
+{
+    $request->validate([
+        'dogum_yili' => ['required', new IsaEken\PhpTcKimlik\Rules\RealYear],
+    ]);
+}
+````
+
+#### Kimlik Kontrolü
+
+````php
+public function index(Request $request)
+{
+    $request->validate([
+        'tc_kimlik_numarasi' => ['required', new IsaEken\PhpTcKimlik\Rules\IdentityNumber],
+        'isim' => ['required', new IsaEken\PhpTcKimlik\Rules\RealName],
+        'soyisim' => ['required', new IsaEken\PhpTcKimlik\Rules\RealName],
+        'dogum_yili' => ['required', new IsaEken\PhpTcKimlik\Rules\RealYear],
+    ]);
+
+    $validator = new IsaEken\PhpTcKimlik\IdentityValidator(
+        "tc_kimlik_numarasi", // varsayılan: identity_number
+        "isim", // varsayılan: first_name
+        "soyisim", // varsayılan: last_name
+        "dogum_yili", // varsayılan: birth_year
+        "post", // opsiyonel method
+        $request // opsiyonel
+    );
+    
+    $validator->validate();
+}
+````
+
+Örnek:
+````php
+public function index(Request $request)
+{
+    $request->validate([
+        'identity_number' => ['required', new IsaEken\PhpTcKimlik\Rules\IdentityNumber],
+        'first_name' => ['required', new IsaEken\PhpTcKimlik\Rules\RealName],
+        'last_name' => ['required', new IsaEken\PhpTcKimlik\Rules\RealName],
+        'birth_year' => ['required', new IsaEken\PhpTcKimlik\Rules\RealYear],
+    ]);
+
+    ((new IsaEken\PhpTcKimlik\IdentityValidator())->validate());
+}
+````
+
+
+----
+
 ### Hızlı kullanım
 
 #### Kimlik bilgilerinin kontrolü
